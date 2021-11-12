@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div th:fragment="scripts">
+
+		<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+				class="bi bi-arrow-up-short"></i></a>
+
+		<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/js/glightbox.min.js}"></script>
+		<!--<script th:src="@{/js/bootstrap.min.js}"></script>-->
+		<script th:src="@{/js/isotope.pkgd.min.js}"></script>
+		<script th:src="@{/js/validate.js}"></script>
+		<script th:src="@{/js/swiper-bundle.min.js}"></script>
+		<script th:src="@{/js/main.js}"></script>
+
+
+		<script type="text/javascript">
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			$(document).ajaxSend(function (e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
+		</script>
+
+	</div>
+</body>
+
+</html>

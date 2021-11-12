@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<th:block th:include="fragments/header.html :: head"></th:block>
+</head>
+
+<body class="about-us">
+	<!-- Navbar Transparent -->
+	<th:block th:include="fragments/homeMenu.html :: menu"></th:block>
+	<main id="main">
+		<section class="inner-page  bg-warning">
+			<div class="container text-center mt-5">
+				<h1 th:text="${restaurant.name}">
+
+				</h1>
+				<p th:text="${restaurant.address}"></p>
+			</div>
+		</section>
+
+	</main>
+
+
+
+	<main id="main">
+		<section id="menu" class="menu mt-5">
+			<div class="container">
+				<div class="section-title">
+					<h2>
+						Check our tasty <span>Menu</span>
+					</h2>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12 d-flex justify-content-center">
+						<ul id="menu-flters">
+							<li data-filter="*" class="filter-active">Show All</li>
+							<li th:each="menuMap:${menus}" th:data-filter="'.filter-'+${menuMap.key}"
+								th:text="${menuMap.key}">Starters</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="row menu-container">
+
+					<th:block th:each="menuMap:${menus}">
+						<div th:each="menu:${menuMap.value}" class="col-lg-6 menu-item"
+							th:classappend="'filter-'+${menuMap.key}">
+							<div class="menu-content">
+								<a href="javascript:;" th:text="${menu.name}">Lobster Bisque</a><span
+									th:text="'₹'+${menu.price}"></span>
+							</div>
+							<div class="menu-ingredients" th:text="${menu.ingredients}"></div>
+						</div>
+					</th:block>
+				</div>
+
+			</div>
+		</section>
+		<!-- End Menu Section -->
+
+	</main>
+	<!--	<th:block th:include="fragments/footer.html :: footer"></th:block>
+--> <input type="hidden" th:name="message" th:value="${message}" id="message">
+	<div th:insert="fragments/script :: scripts"></div>
+	<script>
+		$(document).ready(function () {
+
+			var message = $('#message').val();
+			if (message != "") {
+				alert(message);
+			}
+		});
+	</script>
+</body>
+
+</html>

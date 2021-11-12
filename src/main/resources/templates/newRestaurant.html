@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<th:block th:include="fragments/header.html :: head"></th:block>
+</head>
+
+<body class="about-us">
+	<!-- Navbar Transparent -->
+	<th:block th:include="fragments/homeMenu.html :: menu"></th:block>
+
+	<main id="main">
+
+		<!-- ======= Menu Section ======= -->
+		<section id="menu" class="menu mt-5">
+			<div class="container">
+
+				<div class="row">
+
+					<div class="col-lg-10 offset-lg-1 mt-5">
+						<div class="card">
+							<div class="card-header bg-warning">
+								<h4 class="font-weight-bolder text-white">Restaurant
+									Registration</h4>
+							</div>
+							<div class="card-body">
+								<form th:action="@{/home/save-restaurant}" method="post" id="restaurantForm" role="form"
+									th:object="${restaurantDto}">
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label for="restaurantTypeId">Restaurant Type</label> <select
+													class="form-select" id="restaurantTypeId" name="restaurantTypeId">
+													<option value="">Select Type</option>
+													<option th:each="restaurantType:${restaurantTypes}"
+														th:value="${restaurantType.restaurantTypeId}"
+														th:text="${restaurantType.name}"></option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label for="name">Restaurant Name</label> <input type="text"
+													class="form-control" id="name" placeholder="Restaurant Name"
+													th:field="${restaurantDto.name}">
+
+												<p th:if="${#fields.hasErrors('name')}"
+													th:errorclass="error" th:errors="*{name}" />
+											</div>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label for="address">Address</label> <input type="text"
+													class="form-control" id="address" placeholder="Address"
+													th:field="${restaurantDto.address}">
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label for="phone">Phone</label> <input type="text"
+													class="form-control" id="phone" placeholder="Phone"
+													th:field="${restaurantDto.phone}">
+											</div>
+										</div>
+									</div>
+									<div class="row mt-3">
+										<div class="col-lg-12">
+											<div class="text-center">
+												<button type="submit" class="btn btn-dark">Register</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+		<!-- End Menu Section -->
+
+	</main>
+	<!-- End #main -->
+
+	<input type="hidden" th:name="message" th:value="${message}"
+		id="message">
+	<div th:insert="fragments/script :: scripts"></div>
+	<script>
+		$(document).ready(function () {
+
+			var message = $('#message').val();
+			if (message != "") {
+				alert(message);
+			}
+		});
+	</script>
+</body>
+
+</html>
